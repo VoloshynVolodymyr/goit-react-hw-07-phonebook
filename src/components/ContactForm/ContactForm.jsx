@@ -18,13 +18,13 @@ export default function ContactForm ({contacts})  {
         ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
       )
     ) {
-      alert(`${contact.name} is already in contacts`);
+      toast.error(`${contact.name} already exists`);
       return;
     }
 
     try {
       await addContact(contact);
-      toast.success('Contact added!');
+      setTimeout(()=>{toast.success('Contact was added!')}, 300)
     } catch (error) {
       toast.error('Something went wrong...');
       console.log(error);
@@ -53,6 +53,7 @@ export default function ContactForm ({contacts})  {
 
   return (
     <Form onSubmit={handleFormSubmit}>
+      <Toaster position="top-center" />
       <InputWrapper>
         <Label>Name</Label>
         <Input
